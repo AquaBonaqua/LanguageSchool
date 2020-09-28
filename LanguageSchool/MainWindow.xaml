@@ -6,22 +6,22 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LanguageSchool"
         mc:Ignorable="d"
-        Title="Languages School"  Height="600" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
+        Title="Languages School"  Height="800" Width="1400" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" >
     <StackPanel Background="WhiteSmoke">
-        <Grid Height="100">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 0">
-                <Button Uid="0" Width="150" Content="HOME" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                <Button Uid="1" Width="150" Content="SHOP" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                <Button Uid="2" Width="150" Content="BLOG" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                <Button Uid="3" Width="150" Content="PAGES" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                <Button Uid="4" Width="150" Content="PRODUCTS" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                <Button Uid="5" Width="150" Content="BRANDS" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                <Button Uid="6" Width="150" Content="GIFT CARDS" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+        <Grid Height="90" Background="#FF303030">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="5 0 ">
+                <Button Uid="0" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="1" Width="198" Content="SHOP" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="2" Width="198" Content="BLOG" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="3" Width="198" Content="PAGES" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="4" Width="198" Content="PRODUCTS" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="5" Width="198" Content="BRANDS" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="6" Width="198" Content="GIFT CARDS" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
             </StackPanel>
-            <Grid x:Name="GridCursor" Width="150" Height="5" Background="#FF2196F3" HorizontalAlignment="Left" Margin="10 0"/>
+            <Grid x:Name="GridCursor" Width="198" Height="5" Background="#FF2196F3" HorizontalAlignment="Left" Margin="5 0"/>
         </Grid>
-        <Grid x:Name="GridMain" Height="471" Background="Aquamarine">
-
+        <Grid x:Name="GridMain" Height="681" >
+            <Frame  NavigationUIVisibility="Hidden" Name="MainFrame" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         </Grid>
     </StackPanel>
 </Window>

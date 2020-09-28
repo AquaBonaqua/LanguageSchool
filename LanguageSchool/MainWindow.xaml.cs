@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LanguageSchool.Classes;
+using LanguageSchool.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,11 @@ namespace LanguageSchool
         public MainWindow()
         {
             InitializeComponent();
+
+            InitializeComponent();
+            AppData.Frame = MainFrame;
+            AppData.Ent = new wsr_user_2Entities();
+            AppData.Frame.Navigate(new PageClients());
         }
 
 
@@ -30,12 +37,12 @@ namespace LanguageSchool
         {
             int index = int.Parse(((Button)e.Source).Uid);
 
-            GridCursor.Margin = new Thickness(10 + (150 * index), 0, 0, 0);
+            GridCursor.Margin = new Thickness(10 + (198 * index), 0, 0, 0);
 
             switch (index)
             {
                 case 0:
-                    GridMain.Background = Brushes.Aquamarine;
+                    AppData.Frame.Navigate(new PageClients());
                     break;
                 case 1:
                     GridMain.Background = Brushes.Beige;
