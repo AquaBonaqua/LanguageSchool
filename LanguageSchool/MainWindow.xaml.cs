@@ -57,5 +57,10 @@ namespace LanguageSchool
                     break;
             }
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
