@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Paging.cs" />
     <Compile Include="Client.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>

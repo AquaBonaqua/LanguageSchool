@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LanguageSchool.Pages"
       mc:Ignorable="d" 
-      Height="681" Width="1400" 
+      Height="681" Width="1600" 
       Title="PageClients" Background="#FF303030">
 
     <Grid>
@@ -14,11 +14,11 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid AutoGenerateColumns="False"  CanUserAddRows="False" CanUserDeleteRows="False" ColumnWidth="*"  Name="ClientsGrid">
+        <DataGrid AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" CanUserDeleteRows="False"   Name="ClientsGrid">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Width="Auto" Binding="{Binding ID}"/>
-                <DataGridTextColumn Header="Пол" Width="Auto"  Binding="{Binding Gender.Name}"/>
-                <DataGridTextColumn Header="ФИО" Width="Auto">
+                <DataGridTextColumn Header="ID"  Width="65" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Пол" Width="80"  Binding="{Binding Gender.Name}"/>
+                <DataGridTextColumn Header="ФИО" Width="260">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{1} {0} {2}">
                             <Binding Path="LastName" />
@@ -27,42 +27,38 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Дата рождения" Width="Auto" Binding="{Binding Birthday, StringFormat=\{0:dd.MM.yyyy \} }"/>
-                <DataGridTextColumn Header="Email"  Width="Auto" Binding="{Binding Email}"/>
-                <DataGridTextColumn Header="Номер" Width="Auto"  Binding="{Binding Phone}"/>
-                <DataGridTextColumn Header="Дата добавления" Width="Auto"  Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy \}}"/>
-                <DataGridTextColumn Header="Дата посещения"  Width="Auto" Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy \}}"/>
-                <DataGridTextColumn Header="Количество посещений" Width="Auto"  Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy \}}"/>
+                <DataGridTextColumn Header="Дата рождения" Width="160"  Binding="{Binding Birthday, StringFormat=\{0:dd.MM.yyyy \} }"/>
+                <DataGridTextColumn Header="Email"  Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Номер"  Binding="{Binding Phone}"/>
+                <DataGridTextColumn Header="Дата добавления" Width="160"  Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy \}}"/>
+                <DataGridTextColumn Header="Дата посещения" Width="160"  Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy \}}"/>
+                <DataGridTextColumn Header="Кол-во посещений"    Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy \}}"/>
                 <DataGridTextColumn Header="Список тегов"  Binding="{Binding Gender.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <StackPanel Name="StackStatus" Margin="0 0 32 0" Orientation="Horizontal">
-                <TextBlock VerticalAlignment="Center" Foreground="#FFDADCDF"  FontSize="15" >Количество записей:</TextBlock>
-                <ComboBox Margin="16 0 0 0" Name="NumberOfRecords" FontSize="15" Foreground="#FFDADCDF" Height="30" Width="180" >
-                    <ComboBoxItem>10</ComboBoxItem>
-                    <ComboBoxItem>50</ComboBoxItem>
-                    <ComboBoxItem>200</ComboBoxItem>
-                    <ComboBoxItem>Все</ComboBoxItem>
-                </ComboBox>
-                <Label x:Name='PageInfo'
-                       Foreground='AntiqueWhite' />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <StackPanel Orientation="Vertical" Margin="60 0 0 0" >
+                <StackPanel  HorizontalAlignment="Left"  Orientation="Horizontal" VerticalAlignment="Top" >
+                    <StackPanel Name="StackStatus" Margin="0" Orientation="Horizontal">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" x:Name='PageInfo'    Foreground='AntiqueWhite' FontSize="15" />
+                        <ComboBox Margin="10 0 10 0" Name="NumberOfRecords" FontSize="15" Foreground="#FFDADCDF" Height="30" Width="Auto" SelectionChanged="NumberOfRecords_SelectionChanged" >
+                        </ComboBox>
+                        <Button x:Name='Backwards'   Padding='4'   Content='Предыдущая страница'   Margin='6' Click="Backwards_Click"   ></Button>
+                        <Button x:Name='Forward'   Padding='4' Content='Следующая страница'  Margin='6' Click="Forward_Click"   ></Button>
+                    </StackPanel>
+                </StackPanel>
 
-                <Button x:Name='Backwards'
-                        Padding='4'
-                        Content='&lt; Previous'
-                        Margin='6'
-                        ></Button>
-                <Button x:Name='Forward'
-                        Padding='4'
-                        Content='&gt; Next'
-                        Margin='6'
-                        ></Button>
+                <StackPanel   Orientation="Horizontal">
+
+                    <Label FontSize="15" Content="Пол:"/>
+                    <ComboBox Width="Auto" FontSize="15" Margin="10 0 10 0" Name="CmbGender"/>
+                </StackPanel>
+                
             </StackPanel>
-
-          
-
         </StackPanel>
+        
+        
+        
     </Grid>
 </Page>

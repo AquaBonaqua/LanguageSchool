@@ -6,16 +6,16 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LanguageSchool"
         mc:Ignorable="d"
-        Title="Languages School"  Height="800" Width="1400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" >
+        Title="Languages School"  Height="800" Width="1600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
 
-    <Border BorderBrush="Aquamarine" CornerRadius="12">
+
     <StackPanel Background="WhiteSmoke">
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Height="80" Background="#FF303030">
-                <Image Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" Height="70" Stretch="Fill" Source="Resources\Icons\school_logo.png"/>
-                <TextBlock  Foreground="#FF2196F3" FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Languages School"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0">
+            <Image Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" Height="70" Stretch="Fill" Source="Resources\Icons\school_logo.png"/>
+            <TextBlock  Foreground="#FF2196F3" FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Languages School"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0">
 
-                    <Button Name="BtnMinimize" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Click="BtnMinimize_Click" >
+                <Button Name="BtnMinimize" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Click="BtnMinimize_Click" >
                     <materialDesign:PackIcon Kind="WindowMinimize" Foreground="#FFA2A2A2" Width="25" Height="25" />
                 </Button>
                 <Button Name="BtnClose" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Click="BtnClose_Click">
@@ -25,18 +25,18 @@
         </Grid>
         <Grid Height="54" Background="#FF303030">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="5 0 ">
-                    <StackPanel.Resources>
-                        <Style TargetType="Button">
-                            <Setter Property="FontSize" Value="15"/>
-                        </Style>
-                    </StackPanel.Resources>
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                </StackPanel.Resources>
                 <Button Uid="0" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                    <Button Uid="1" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                    <Button Uid="2" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                    <Button Uid="3" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                    <Button Uid="4" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                    <Button Uid="5" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                    <Button Uid="6" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="1" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="2" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="3" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="4" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="5" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <Button Uid="6" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
             </StackPanel>
             <Grid x:Name="GridCursor" Width="200" Height="5" Background="#FF2196F3" HorizontalAlignment="Left" Margin="5 0 0 0"  VerticalAlignment="Bottom"/>
         </Grid>
@@ -44,5 +44,4 @@
             <Frame  NavigationUIVisibility="Hidden" Name="MainFrame" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  />
         </Grid>
     </StackPanel>
-    </Border>
 </Window>
