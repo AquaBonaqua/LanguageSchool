@@ -25,8 +25,6 @@ namespace LanguageSchool
         public MainWindow()
         {
             InitializeComponent();
-
-            InitializeComponent();
             AppData.Frame = MainFrame;
             AppData.Ent = new wsr_user_2Entities();
             AppData.Frame.Navigate(new PageClients());
@@ -37,7 +35,7 @@ namespace LanguageSchool
         {
             int index = int.Parse(((Button)e.Source).Uid);
 
-            GridCursor.Margin = new Thickness(10 + (198 * index), 0, 0, 0);
+            GridCursor.Margin = new Thickness(5 + (198 * index), 0, 0, 0);
 
             switch (index)
             {
@@ -65,9 +63,26 @@ namespace LanguageSchool
             }
         }
 
+     
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }
