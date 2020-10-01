@@ -41,7 +41,7 @@ namespace LanguageSchool.Pages
 
             PagedTable.PageIndex = 1; //Sets the Initial Index to a default value
 
-            int[] RecordsToShow = { 10, 50, 200, 500 }; //This Array can be any number groups
+            int[] RecordsToShow = { 10, 50, 200 }; //This Array can be any number groups
 
 
 
@@ -50,16 +50,19 @@ namespace LanguageSchool.Pages
                 NumberOfRecords.Items.Add(RecordGroup); //Fill the ComboBox with the Array
             }
 
-            NumberOfRecords.Items.Add("Все");
+            NumberOfRecords.Items.Add("All");
 
-            NumberOfRecords.SelectedItem = 10; //Initialize the ComboBox
+            NumberOfRecords.SelectedItem = "All"; //Initialize the ComboBox
 
-            numberOfRecPerPage = Convert.ToInt32(NumberOfRecords.SelectedItem); //Convert the Combox Output to type int
+            string[] GendersToShow = { "Male", "Female", "All" }; //This Array can be any number groups
 
-            CmbGender.ItemsSource = AppData.Ent.Gender.ToList();
-            CmbGender.DisplayMemberPath = "Name";
-            CmbGender.SelectedValuePath = "ID";
-
+            foreach (string GenderGroup in GendersToShow)
+            {
+                CmbGender.Items.Add(GenderGroup); //Fill the ComboBox with the Array
+            }
+            
+            CmbGender.SelectedItem = "All";
+            
             UpdateTable();
         }
 
@@ -70,9 +73,32 @@ namespace LanguageSchool.Pages
             DataTable firstTable = PagedTable.SetPaging(myList, numberOfRecPerPage); //Fill a DataTable with the First set based on the numberOfRecPerPage
             ClientsGrid.ItemsSource = firstTable.DefaultView; //Fill the dataGrid with the DataTable created previously
 
-            numberOfRecPerPage = Convert.ToInt32(NumberOfRecords.SelectedItem);
-            ClientsGrid.ItemsSource = PagedTable.First(myList, numberOfRecPerPage).DefaultView;
-            PageInfo.Content = PageNumberDisplay();
+            if ((NumberOfRecords.SelectedItem == "All") && (CmbGender.SelectedItem == "All"))
+            {
+                ClientsGrid.ItemsSource = myList;
+                PageInfo.Content = "Показано " + myList.Count + " записей";
+            }
+
+            else
+            {
+                numberOfRecPerPage = Convert.ToInt32(NumberOfRecords.SelectedItem);
+                if ((CmbGender.SelectedIndex == 0) || (CmbGender.SelectedIndex == 1))
+                {
+                    myList = AppData.Ent.Client.Where(x => x.GenderCode == CmbGender.SelectedIndex.ToString()).ToList();
+                    ClientsGrid.ItemsSource = PagedTable.First(myList, numberOfRecPerPage).DefaultView;
+                    PageInfo.Content = PageNumberDisplay();
+
+                }
+                else
+                {
+                    ClientsGrid.ItemsSource = PagedTable.First(myList, numberOfRecPerPage).DefaultView;
+                    PageInfo.Content = PageNumberDisplay();
+                }
+          
+             
+            }
+
+           
         }
 
         public string PageNumberDisplay()
@@ -100,16 +126,10 @@ namespace LanguageSchool.Pages
         private void NumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            if (NumberOfRecords.SelectedIndex == 4)
-            {
-                ClientsGrid.ItemsSource = myList;
-                PageInfo.Content = "Показано " +  myList.Count + " записей";
-            }
-                
-            else
-            {
-                UpdateTable();
-            }
+      
+           
+          UpdateTable();
+          
          
 
         }

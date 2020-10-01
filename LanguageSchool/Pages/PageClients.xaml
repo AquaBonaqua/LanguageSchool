@@ -37,9 +37,9 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <StackPanel Orientation="Vertical" Margin="60 0 0 0" >
-                <StackPanel  HorizontalAlignment="Left"  Orientation="Horizontal" VerticalAlignment="Top" >
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"  >
+                <StackPanel  HorizontalAlignment="Left"  Orientation="Horizontal"  >
                     <StackPanel Name="StackStatus" Margin="0" Orientation="Horizontal">
                         <Label HorizontalAlignment="Center" VerticalAlignment="Center" x:Name='PageInfo'    Foreground='AntiqueWhite' FontSize="15" />
                         <ComboBox Margin="10 0 10 0" Name="NumberOfRecords" FontSize="15" Foreground="#FFDADCDF" Height="30" Width="Auto" SelectionChanged="NumberOfRecords_SelectionChanged" >
@@ -49,10 +49,10 @@
                     </StackPanel>
                 </StackPanel>
 
-                <StackPanel   Orientation="Horizontal">
+                <StackPanel  Margin="20 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
 
-                    <Label FontSize="15" Content="Пол:"/>
-                    <ComboBox Width="Auto" FontSize="15" Margin="10 0 10 0" Name="CmbGender"/>
+                    <Label FontSize="15" Margin="0 0 10 0" Content="Пол:"/>
+                    <ComboBox Foreground="#FFDADCDF" Width="Auto" FontSize="15" Margin="0" Name="CmbGender"/>
                 </StackPanel>
                 
             </StackPanel>
