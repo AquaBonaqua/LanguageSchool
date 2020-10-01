@@ -1,14 +1,14 @@
-﻿using LanguageSchool.Classes;
-using LanguageSchool.Pages;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using LanguageSchool.Classes;
+using LanguageSchool.Pages;
 
 namespace LanguageSchool
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    ///     Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -22,9 +22,9 @@ namespace LanguageSchool
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int index = int.Parse(((Button)e.Source).Uid);
+            var index = int.Parse(((Button) e.Source).Uid);
 
-            GridCursor.Margin = new Thickness(5 + (198 * index), 0, 0, 0);
+            GridCursor.Margin = new Thickness(5 + 198 * index, 0, 0, 0);
 
             switch (index)
             {
@@ -65,7 +65,7 @@ namespace LanguageSchool
 
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized;
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)

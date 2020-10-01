@@ -1,22 +1,21 @@
-﻿using LanguageSchool.Classes;
-using PagingWPFDataGrid;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using LanguageSchool.Classes;
+using PagingWPFDataGrid;
 
 namespace LanguageSchool.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для PageClients.xaml
+    ///     Логика взаимодействия для PageClients.xaml
     /// </summary>
     public partial class PageClients : Page
     {
-        private int numberOfRecPerPage;
-        private static Paging PagedTable = new Paging();
+        private static readonly Paging PagedTable = new Paging();
         private IList<Client> myList = AppData.Ent.Client.ToList();
+        private int numberOfRecPerPage;
 
         public PageClients()
         {
@@ -24,32 +23,37 @@ namespace LanguageSchool.Pages
 
             PagedTable.PageIndex = 1; //Sets the Initial Index to a default value
 
-            int[] RecordsToShow = { 10, 50, 200 }; //This Array can be any number groups
+            int[] recordsToShow = {10, 50, 200}; //This Array can be any number groups
 
-            foreach (int RecordGroup in RecordsToShow)
-            {
-                NumberOfRecords.Items.Add(RecordGroup); //Fill the ComboBox with the Array
-            }
+            foreach (var recordGroup in recordsToShow)
+                NumberOfRecords.Items.Add(recordGroup); //Fill the ComboBox with the Array
 
             NumberOfRecords.Items.Add("All");
 
             NumberOfRecords.SelectedItem = "All"; //Initialize the ComboBox
 
-            string[] GendersToShow = { "Male", "Female", "All" }; //This Array can be any number groups
+            string[] gendersToShow = {"Male", "Female", "All"}; //This Array can be any number groups
 
-            foreach (string GenderGroup in GendersToShow)
-            {
-                CmbGender.Items.Add(GenderGroup); //Fill the ComboBox with the Array
-            }
+            foreach (var genderGroup in gendersToShow)
+                CmbGender.Items.Add(genderGroup); //Fill the ComboBox with the Array
 
             CmbGender.SelectedItem = "All";
 
             UpdateTable();
         }
 
+
+        public void FindInTable()
+        {
+            ClientsGrid.ItemsSource = myList.Where(x => x.FirstName == TbFind.Text || x.LastName == TbFind.Text || x.Patronymic == TbFind.Text || x.Email == TbFind.Text || x.Phone == TbFind.Text);
+        }
+
+
         public void UpdateTable()
         {
-            DataTable firstTable = PagedTable.SetPaging(myList, numberOfRecPerPage); //Fill a DataTable with the First set based on the numberOfRecPerPage
+            var firstTable =
+                PagedTable.SetPaging(myList,
+                    numberOfRecPerPage); //Fill a DataTable with the First set based on the numberOfRecPerPage
             ClientsGrid.ItemsSource = firstTable.DefaultView; //Fill the dataGrid with the DataTable created previously
 
             if (NumberOfRecords.SelectedIndex == 3)
@@ -57,7 +61,7 @@ namespace LanguageSchool.Pages
                 if (CmbGender.SelectedIndex != 2)
 
                 {
-                    ClientsGrid.ItemsSource = myList.Where(x => x.Gender.Name == (string)CmbGender.SelectedItem);
+                    ClientsGrid.ItemsSource = myList.Where(x => x.Gender.Name == (string) CmbGender.SelectedItem);
                     PageInfo.Content = "Показано " + myList.Count + " записей";
                 }
                 else
@@ -78,7 +82,7 @@ namespace LanguageSchool.Pages
                 else
                 {
                     numberOfRecPerPage = Convert.ToInt32(NumberOfRecords.SelectedItem);
-                    myList = AppData.Ent.Client.Where(x => x.Gender.Name == (string)CmbGender.SelectedItem).ToList();
+                    myList = AppData.Ent.Client.Where(x => x.Gender.Name == (string) CmbGender.SelectedItem).ToList();
                     ClientsGrid.ItemsSource = PagedTable.First(myList, numberOfRecPerPage).DefaultView;
                     PageInfo.Content = PageNumberDisplay();
                 }
@@ -87,12 +91,11 @@ namespace LanguageSchool.Pages
 
         public string PageNumberDisplay()
         {
-            int PagedNumber = numberOfRecPerPage * (PagedTable.PageIndex + 1);
-            if (PagedNumber > myList.Count)
-            {
-                PagedNumber = myList.Count;
-            }
-            return "Показано " + PagedNumber + " записей из " + myList.Count; //This dramatically reduced the number of times I had to write this string statement
+            var pagedNumber = numberOfRecPerPage * (PagedTable.PageIndex + 1);
+            if (pagedNumber > myList.Count) pagedNumber = myList.Count;
+            return
+                "Показано " + pagedNumber + " записей из " +
+                myList.Count; //This dramatically reduced the number of times I had to write this string statement
         }
 
         private void Forward_Click(object sender, RoutedEventArgs e)
@@ -115,6 +118,11 @@ namespace LanguageSchool.Pages
         private void CmbGender_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateTable();
+        }
+
+        private void TbFind_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            FindInTable();
         }
     }
 }
