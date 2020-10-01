@@ -73,29 +73,46 @@ namespace LanguageSchool.Pages
             DataTable firstTable = PagedTable.SetPaging(myList, numberOfRecPerPage); //Fill a DataTable with the First set based on the numberOfRecPerPage
             ClientsGrid.ItemsSource = firstTable.DefaultView; //Fill the dataGrid with the DataTable created previously
 
-            if ((NumberOfRecords.SelectedItem == "All") && (CmbGender.SelectedItem == "All"))
+            if (NumberOfRecords.SelectedIndex == 3)
             {
-                ClientsGrid.ItemsSource = myList;
-                PageInfo.Content = "Показано " + myList.Count + " записей";
+                if (CmbGender.SelectedIndex != 2)
+
+                {
+                    ClientsGrid.ItemsSource = myList.Where(x => x.Gender.Name == (string)CmbGender.SelectedItem);
+                    PageInfo.Content = "Показано " + myList.Count + " записей";
+                }
+
+                else
+                {
+                    ClientsGrid.ItemsSource = myList;
+                    PageInfo.Content = "Показано " + myList.Count + " записей";
+                }
+
+               
             }
 
             else
             {
-                numberOfRecPerPage = Convert.ToInt32(NumberOfRecords.SelectedItem);
-                if ((CmbGender.SelectedIndex == 0) || (CmbGender.SelectedIndex == 1))
+
+                 if (CmbGender.SelectedIndex == 2)
+
                 {
-                    myList = AppData.Ent.Client.Where(x => x.GenderCode == CmbGender.SelectedIndex.ToString()).ToList();
+                    numberOfRecPerPage = Convert.ToInt32(NumberOfRecords.SelectedItem);
                     ClientsGrid.ItemsSource = PagedTable.First(myList, numberOfRecPerPage).DefaultView;
                     PageInfo.Content = PageNumberDisplay();
 
                 }
-                else
+
+                 else
                 {
+                    numberOfRecPerPage = Convert.ToInt32(NumberOfRecords.SelectedItem);
+                    myList = AppData.Ent.Client.Where(x => x.Gender.Name == (string)CmbGender.SelectedItem).ToList();
                     ClientsGrid.ItemsSource = PagedTable.First(myList, numberOfRecPerPage).DefaultView;
                     PageInfo.Content = PageNumberDisplay();
+
+                    
                 }
-          
-             
+
             }
 
            
@@ -125,13 +142,13 @@ namespace LanguageSchool.Pages
 
         private void NumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-      
-           
           UpdateTable();
-          
-         
 
+        }
+
+        private void CmbGender_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateTable();
         }
     }
 }

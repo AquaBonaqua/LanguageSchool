@@ -52,7 +52,7 @@
                 <StackPanel  Margin="20 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
 
                     <Label FontSize="15" Margin="0 0 10 0" Content="Пол:"/>
-                    <ComboBox Foreground="#FFDADCDF" Width="Auto" FontSize="15" Margin="0" Name="CmbGender"/>
+                    <ComboBox Foreground="#FFDADCDF" Width="Auto" FontSize="15" Margin="0" Name="CmbGender" SelectionChanged="CmbGender_SelectionChanged"/>
                 </StackPanel>
                 
             </StackPanel>
