@@ -4,20 +4,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-
 namespace PagingWPFDataGrid
 {
     /// <summary>
     /// Performs Paging operations on a given List and Outputs a DataTable
     /// </summary>
-	class Paging
-	{
+	internal class Paging
+    {
         /// <summary>
         /// Current Page Index Number
         /// </summary>
         public int PageIndex { get; set; }
 
-        DataTable PagedList = new DataTable(); //Initialize a DataTable Locally
+        private DataTable PagedList = new DataTable(); //Initialize a DataTable Locally
 
         /// <summary>
         /// Show the next set of Items based on page index
@@ -45,7 +44,7 @@ namespace PagingWPFDataGrid
         public DataTable Previous(IList<Client> ListToPage, int RecordsPerPage)
         {
             PageIndex--;
-            if(PageIndex <= 0)
+            if (PageIndex <= 0)
             {
                 PageIndex = 0;
             }
@@ -86,17 +85,17 @@ namespace PagingWPFDataGrid
         /// <param name="RecordsPerPage"></param>
         /// <returns>DataTable</returns>
 		public DataTable SetPaging(IList<Client> ListToPage, int RecordsPerPage)
-		{
-			int PageGroup = PageIndex * RecordsPerPage;
+        {
+            int PageGroup = PageIndex * RecordsPerPage;
 
-			IList<Client> PagedList = new List<Client>();
+            IList<Client> PagedList = new List<Client>();
 
-			PagedList = ListToPage.Skip(PageGroup).Take(RecordsPerPage).ToList(); //This is where the Magic Happens. If you have a Specific sort or want to return ONLY a specific set of columns, add it to this LINQ Query.
+            PagedList = ListToPage.Skip(PageGroup).Take(RecordsPerPage).ToList(); //This is where the Magic Happens. If you have a Specific sort or want to return ONLY a specific set of columns, add it to this LINQ Query.
 
-			DataTable FinalPaging = PagedTable(PagedList);
+            DataTable FinalPaging = PagedTable(PagedList);
 
-			return FinalPaging;
-		}
+            return FinalPaging;
+        }
 
         //If youre paging say 30,000 rows and you know the processors of the users will be slow you can ASync thread both of these to allow the UI to update after they finish and prevent a hang.
 
@@ -107,26 +106,26 @@ namespace PagingWPFDataGrid
         /// <param name="SourceList"></param>
         /// <returns>DataTable</returns>
 		private DataTable PagedTable<T>(IList<T> SourceList)
-		{
-			Type columnType = typeof(T);
-			DataTable TableToReturn = new DataTable();
+        {
+            Type columnType = typeof(T);
+            DataTable TableToReturn = new DataTable();
 
-			foreach (var Column in columnType.GetProperties())
-			{
-				TableToReturn.Columns.Add(Column.Name, Nullable.GetUnderlyingType(
+            foreach (var Column in columnType.GetProperties())
+            {
+                TableToReturn.Columns.Add(Column.Name, Nullable.GetUnderlyingType(
                                  Column.PropertyType) ?? Column.PropertyType);
-			}
+            }
 
-			foreach (object item in SourceList)
-			{
-				DataRow ReturnTableRow = TableToReturn.NewRow();
-				foreach (var Column in columnType.GetProperties())
-				{
-					ReturnTableRow[Column.Name] = Column.GetValue(item);
-				}
-				TableToReturn.Rows.Add(ReturnTableRow);
-			}
-			return TableToReturn;
-		}
-	}
+            foreach (object item in SourceList)
+            {
+                DataRow ReturnTableRow = TableToReturn.NewRow();
+                foreach (var Column in columnType.GetProperties())
+                {
+                    ReturnTableRow[Column.Name] = Column.GetValue(item);
+                }
+                TableToReturn.Rows.Add(ReturnTableRow);
+            }
+            return TableToReturn;
+        }
+    }
 }
