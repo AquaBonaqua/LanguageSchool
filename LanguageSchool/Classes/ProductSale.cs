@@ -7,17 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LanguageSchool
+namespace LanguageSchool.Classes
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductPhoto
+    public partial class ProductSale
     {
         public int ID { get; set; }
+        public System.DateTime SaleDate { get; set; }
         public int ProductID { get; set; }
-        public string PhotoPath { get; set; }
+        public int Quantity { get; set; }
+        public Nullable<int> ClientServiceID { get; set; }
     
+        public virtual ClientService ClientService { get; set; }
         public virtual Product Product { get; set; }
     }
 }

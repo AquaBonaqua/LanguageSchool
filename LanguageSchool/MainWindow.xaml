@@ -10,19 +10,17 @@
 
     <StackPanel Background="WhiteSmoke">
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Height="80" Background="#FF303030">
-            <Image Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" Height="70"
+            <Image Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="65" Height="65"
                    Stretch="Fill" Source="Resources\Icons\school_logo.png" />
-            <TextBlock Foreground="#FF2196F3" FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center"
+            <TextBlock Foreground="#CC2196F3" FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center"
                        VerticalAlignment="Center" Text="Languages School" />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="7.5">
 
-                <Button Name="BtnMinimize" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top"
-                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Click="BtnMinimize_Click">
-                    <materialDesign:PackIcon Kind="WindowMinimize" Foreground="#FFA2A2A2" Width="25" Height="25" />
+                <Button Click="BtnMinimize_Click"  Width="30" Padding="0" Height="30" Name="BtnMinimize" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" >
+                    <Image Width="30" Height="30" Source="Resources/Icons/minimize.png"></Image>
                 </Button>
-                <Button Name="BtnClose" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top"
-                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Click="BtnClose_Click">
-                    <materialDesign:PackIcon Kind="CloseBox" Foreground="#FFA2A2A2" Width="25" Height="25" />
+                <Button Click="BtnClose_Click" Margin="5 0 0 0" Padding="0" Width="30" Height="30" Name="BtnClose" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top">
+                    <Image  Width="30" Height="30" Source="Resources/Icons/close.png"></Image>
                 </Button>
             </StackPanel>
         </Grid>
@@ -33,8 +31,12 @@
                         <Setter Property="FontSize" Value="15" />
                     </Style>
                 </StackPanel.Resources>
-                <Button Uid="0" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}"
-                        Foreground="#FF2196F3" Click="Button_Click" />
+                <Button Uid="0" Width="198" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#CC2196F3" Click="Button_Click">
+                    <StackPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <Image Margin="0 0 40 0" HorizontalAlignment="Left" Source="Resources/Icons/icons8_customer_60px.png" Height="40" Width="40"></Image>
+                        <TextBlock   VerticalAlignment="Center"><Run Text="Клиенты"/></TextBlock>
+                    </StackPanel>
+                </Button>
                 <Button Uid="1" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}"
                         Foreground="#FF2196F3" Click="Button_Click" />
                 <Button Uid="2" Width="198" Content="Клиенты" Height="50" Background="{x:Null}" BorderBrush="{x:Null}"

@@ -46,12 +46,12 @@
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                     <StackPanel Name="StackStatus" Margin="0" Orientation="Horizontal">
                         <Label HorizontalAlignment="Center" VerticalAlignment="Center" x:Name='PageInfo'
-                               Foreground='AntiqueWhite' FontSize="15" />
-                        <ComboBox Margin="10 0 10 0" Name="NumberOfRecords" FontSize="15" Foreground="#FFDADCDF"
-                                  Height="30" Width="Auto" SelectionChanged="NumberOfRecords_SelectionChanged" />
-                        <Button x:Name='Backwards' Padding='4' Content='Предыдущая страница' Margin='6'
+                               Foreground='AntiqueWhite' FontSize="20" />
+                        <ComboBox Margin="10 0 10 0" Name="NumberOfRecords" FontSize="20"  Foreground="#FFDADCDF"
+                                  Height="Auto" Width="Auto" SelectionChanged="NumberOfRecords_SelectionChanged" />
+                        <Button x:Name='Backwards' FontSize="18" Content='Предыдущая страница' Margin='6'
                                 Click="Backwards_Click" />
-                        <Button x:Name='Forward' Padding='4' Content='Следующая страница' Margin='6'
+                        <Button  x:Name='Forward' FontSize="18" Content='Следующая страница'  Margin='6'
                                 Click="Forward_Click" />
                     </StackPanel>
                 </StackPanel>
@@ -59,16 +59,19 @@
                 <StackPanel Margin="20 0 40 0" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Orientation="Horizontal">
 
-                    <Label FontSize="15" Margin="0 0 10 0" Content="Пол:" />
-                    <ComboBox Foreground="#FFDADCDF" Width="Auto" FontSize="15" Margin="0" Name="CmbGender"
+                    <Label FontSize="20" Margin="0 0 10 0" Content="Пол:" />
+                    <ComboBox Foreground="#FFDADCDF" Width="Auto" FontSize="20"  Name="CmbGender"
                               SelectionChanged="CmbGender_SelectionChanged" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="0 0 20 0" VerticalAlignment="Center" Foreground="#FFDADCDF" Text="Поиск:" FontSize="15"></TextBlock>
-                    <TextBox Width="200" Height="30" FontSize="15" Foreground="#FFDADCDF" Name="TbFind" TextChanged="TbFind_OnTextChanged"></TextBox>
+                    <TextBlock Margin="0 0 20 0" VerticalAlignment="Center" Foreground="#FFDADCDF" Text="Поиск:" FontSize="20"></TextBlock>
+                    <TextBox Width="200" Height="35" FontSize="20" Foreground="#FFDADCDF" Name="TbFind" TextChanged="TbFind_OnTextChanged"></TextBox>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
+
+        <Grid  Width="1600" Height="3" Background="#FF2196F3" HorizontalAlignment="Left"
+               VerticalAlignment="Top" Grid.Row="1"/>
     </Grid>
 </Page>

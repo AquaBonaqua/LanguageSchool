@@ -7,38 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LanguageSchool
+namespace LanguageSchool.Classes
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class ClientService
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public ClientService()
         {
-            this.ProductPhoto = new HashSet<ProductPhoto>();
+            this.DocumentByService = new HashSet<DocumentByService>();
             this.ProductSale = new HashSet<ProductSale>();
-            this.Product1 = new HashSet<Product>();
-            this.Product2 = new HashSet<Product>();
         }
     
         public int ID { get; set; }
-        public string Title { get; set; }
-        public decimal Cost { get; set; }
-        public string Description { get; set; }
-        public string MainImagePath { get; set; }
-        public bool IsActive { get; set; }
-        public Nullable<int> ManufacturerID { get; set; }
+        public int ClientID { get; set; }
+        public int ServiceID { get; set; }
+        public System.DateTime StartTime { get; set; }
+        public string Comment { get; set; }
     
-        public virtual Manufacturer Manufacturer { get; set; }
+        public virtual Client Client { get; set; }
+        public virtual Service Service { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductPhoto> ProductPhoto { get; set; }
+        public virtual ICollection<DocumentByService> DocumentByService { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSale> ProductSale { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Product1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Product2 { get; set; }
     }
 }

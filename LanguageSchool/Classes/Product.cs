@@ -7,31 +7,38 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LanguageSchool
+namespace LanguageSchool.Classes
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Service
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Service()
+        public Product()
         {
-            this.ClientService = new HashSet<ClientService>();
-            this.ServicePhoto = new HashSet<ServicePhoto>();
+            this.ProductPhoto = new HashSet<ProductPhoto>();
+            this.ProductSale = new HashSet<ProductSale>();
+            this.Product1 = new HashSet<Product>();
+            this.Product2 = new HashSet<Product>();
         }
     
         public int ID { get; set; }
         public string Title { get; set; }
         public decimal Cost { get; set; }
-        public int DurationInSeconds { get; set; }
         public string Description { get; set; }
-        public Nullable<double> Discount { get; set; }
         public string MainImagePath { get; set; }
+        public bool IsActive { get; set; }
+        public Nullable<int> ManufacturerID { get; set; }
     
+        public virtual Manufacturer Manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientService> ClientService { get; set; }
+        public virtual ICollection<ProductPhoto> ProductPhoto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ServicePhoto> ServicePhoto { get; set; }
+        public virtual ICollection<ProductSale> ProductSale { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Product1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Product2 { get; set; }
     }
 }

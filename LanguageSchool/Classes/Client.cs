@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LanguageSchool
+namespace LanguageSchool.Classes
 {
     using System;
     using System.Collections.Generic;
@@ -20,8 +20,7 @@ namespace LanguageSchool
             this.ClientService = new HashSet<ClientService>();
             this.Tag = new HashSet<Tag>();
         }
-
-
+    
         public int ID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -30,7 +29,7 @@ namespace LanguageSchool
         public System.DateTime RegistrationDate { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string GenderCode { get; set; }
+        public int GenderCode { get; set; }
         public string PhotoPath { get; set; }
     
         public virtual Gender Gender { get; set; }

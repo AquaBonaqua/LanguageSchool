@@ -7,15 +7,20 @@ using LanguageSchool.Classes;
 using PagingWPFDataGrid;
 
 namespace LanguageSchool.Pages
+
 {
+    
     /// <summary>
     ///     Логика взаимодействия для PageClients.xaml
     /// </summary>
+    /// 
     public partial class PageClients : Page
     {
         private static readonly Paging PagedTable = new Paging();
         private IList<Client> myList = AppData.Ent.Client.ToList();
         private int numberOfRecPerPage;
+
+      
 
         public PageClients()
         {
@@ -28,16 +33,16 @@ namespace LanguageSchool.Pages
             foreach (var recordGroup in recordsToShow)
                 NumberOfRecords.Items.Add(recordGroup); //Fill the ComboBox with the Array
 
-            NumberOfRecords.Items.Add("All");
+            NumberOfRecords.Items.Add("Все");
 
-            NumberOfRecords.SelectedItem = "All"; //Initialize the ComboBox
+            NumberOfRecords.SelectedItem = "Все"; //Initialize the ComboBox
 
-            string[] gendersToShow = {"Male", "Female", "All"}; //This Array can be any number groups
+            string[] gendersToShow = {"Male", "Female", "Любой"}; //This Array can be any number groups
 
             foreach (var genderGroup in gendersToShow)
                 CmbGender.Items.Add(genderGroup); //Fill the ComboBox with the Array
 
-            CmbGender.SelectedItem = "All";
+            CmbGender.SelectedItem = "Любой";
 
             UpdateTable();
         }
@@ -45,7 +50,16 @@ namespace LanguageSchool.Pages
 
         public void FindInTable()
         {
-            ClientsGrid.ItemsSource = myList.Where(x => x.FirstName == TbFind.Text || x.LastName == TbFind.Text || x.Patronymic == TbFind.Text || x.Email == TbFind.Text || x.Phone == TbFind.Text);
+            if (TbFind.Text == String.Empty)
+            {
+                UpdateTable();
+            }
+
+            else
+            {
+                ClientsGrid.ItemsSource = myList.Where(x => x.FirstName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) || x.LastName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) || x.Patronymic.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) || x.Email.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) || x.Phone.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase));
+            }
+
         }
 
 
@@ -75,7 +89,9 @@ namespace LanguageSchool.Pages
                 if (CmbGender.SelectedIndex == 2)
 
                 {
+                    
                     numberOfRecPerPage = Convert.ToInt32(NumberOfRecords.SelectedItem);
+                    myList = AppData.Ent.Client.ToList();
                     ClientsGrid.ItemsSource = PagedTable.First(myList, numberOfRecPerPage).DefaultView;
                     PageInfo.Content = PageNumberDisplay();
                 }
@@ -125,4 +141,13 @@ namespace LanguageSchool.Pages
             FindInTable();
         }
     }
+
+    public static class StringExtensions
+    {
+        public static bool Contains(this string source, string toCheck, StringComparison comp)
+        {
+            return source?.IndexOf(toCheck, comp) >= 0;
+        }
+    }
+
 }

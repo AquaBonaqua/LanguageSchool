@@ -25,7 +25,7 @@
           <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" />
           <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="GenderCode" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="GenderCode" Type="int" Nullable="false" />
           <Property Name="PhotoPath" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="ClientService">
@@ -48,9 +48,9 @@
         </EntityType>
         <EntityType Name="Gender">
           <Key>
-            <PropertyRef Name="Code" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Code" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Manufacturer">
@@ -156,7 +156,7 @@
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
-              <PropertyRef Name="Code" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Client">
               <PropertyRef Name="GenderCode" />
@@ -367,7 +367,7 @@
           <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GenderCode" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="GenderCode" Type="Int32" Nullable="false" />
           <Property Name="PhotoPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Gender" Relationship="Self.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
           <NavigationProperty Name="ClientService" Relationship="Self.FK_ClientService_Client" FromRole="Client" ToRole="ClientService" />
@@ -398,9 +398,9 @@
         </EntityType>
         <EntityType Name="Gender">
           <Key>
-            <PropertyRef Name="Code" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Code" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
         </EntityType>
@@ -488,7 +488,7 @@
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
-              <PropertyRef Name="Code" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Client">
               <PropertyRef Name="GenderCode" />
@@ -701,7 +701,7 @@
           <EntitySetMapping Name="Gender">
             <EntityTypeMapping TypeName="wsr_user_2Model.Gender">
               <MappingFragment StoreEntitySet="Gender">
-                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>

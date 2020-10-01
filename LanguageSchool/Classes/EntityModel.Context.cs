@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LanguageSchool
+namespace LanguageSchool.Classes
 {
     using System;
     using System.Data.Entity;

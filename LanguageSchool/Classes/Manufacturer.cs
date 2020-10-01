@@ -7,17 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LanguageSchool
+namespace LanguageSchool.Classes
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class DocumentByService
+    public partial class Manufacturer
     {
-        public int ID { get; set; }
-        public int ClientServiceID { get; set; }
-        public string DocumentPath { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Manufacturer()
+        {
+            this.Product = new HashSet<Product>();
+        }
     
-        public virtual ClientService ClientService { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Product { get; set; }
     }
 }
