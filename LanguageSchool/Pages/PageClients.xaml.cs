@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shell;
 using LanguageSchool.Classes;
+using LanguageSchool.Forms;
 using PagingWPFDataGrid;
 
 namespace LanguageSchool.Pages
@@ -57,7 +59,12 @@ namespace LanguageSchool.Pages
 
             else
             {
-                ClientsGrid.ItemsSource = myList.Where(x => x.FirstName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) || x.LastName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) || x.Patronymic.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) || x.Email.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) || x.Phone.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase));
+                ClientsGrid.ItemsSource = myList.Where(x =>
+                    x.FirstName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                    x.LastName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                    x.Patronymic.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                    x.Email.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                    x.Phone.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase));
             }
 
         }
@@ -75,13 +82,51 @@ namespace LanguageSchool.Pages
                 if (CmbGender.SelectedIndex != 2)
 
                 {
-                    ClientsGrid.ItemsSource = myList.Where(x => x.Gender.Name == (string) CmbGender.SelectedItem);
-                    PageInfo.Content = "Показано " + myList.Count + " записей";
+                    if (TbFind.Text == String.Empty)
+                    {
+                        ClientsGrid.ItemsSource = myList.Where(x => x.Gender.Name == (string)CmbGender.SelectedItem);
+                        PageInfo.Content = "Показано " + myList.Count + " записей";
+                    }
+
+                    else
+                    {
+                        ClientsGrid.ItemsSource = myList.Where(x => x.Gender.Name == (string)CmbGender.SelectedItem).Where(x =>
+                            x.FirstName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                            x.LastName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                            x.Patronymic.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                            x.Email.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                            x.Phone.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase)); ;
+                        PageInfo.Content = "Показано " + myList.Count + " записей";
+
+                      
+                    }
+
+
+                  
                 }
                 else
                 {
-                    ClientsGrid.ItemsSource = myList;
-                    PageInfo.Content = "Показано " + myList.Count + " записей";
+                    if (TbFind.Text == String.Empty)
+                    {
+                        ClientsGrid.ItemsSource = myList;
+                        PageInfo.Content = "Показано " + myList.Count + " записей";
+                    }
+
+                    else
+                    {
+                        ClientsGrid.ItemsSource = myList.Where(x =>
+                            x.FirstName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                            x.LastName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                            x.Patronymic.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                            x.Email.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
+                            x.Phone.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase));
+                        PageInfo.Content = "Показано " + myList.Count + " записей";
+
+
+                    }
+
+
+                    
                 }
             }
             else
@@ -138,7 +183,25 @@ namespace LanguageSchool.Pages
 
         private void TbFind_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            FindInTable();
+            UpdateTable();
+        }
+
+        private void CheckBirthDay_OnChecked(object sender, RoutedEventArgs e)
+        {
+            ClientsGrid.ItemsSource = AppData.Ent.Client.Where(x => x.Birthday.Value.Month == DateTime.Now.Month).ToList();
+        }
+
+        private void CheckBirthDay_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            UpdateTable();
+        }
+
+
+        private void BtnEditClient_OnClick(object sender, RoutedEventArgs e)
+        {
+            WindowClient windowClient = new WindowClient((sender as Button).DataContext as Client);
+
+            windowClient.Show();
         }
     }
 

@@ -34,10 +34,19 @@
                 <DataGridTextColumn Header="Дата добавления" Width="160"
                                     Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy \}}" />
                 <DataGridTextColumn Header="Дата посещения" Width="160"
-                                    Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy \}}" />
+                                    Binding="{Binding LastServiceDate}" />
                 <DataGridTextColumn Header="Кол-во посещений"
                                     Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy \}}" />
                 <DataGridTextColumn Header="Список тегов" Binding="{Binding Gender.Name}" />
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Изменить" Name="BtnEditClient"  Click="BtnEditClient_OnClick"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
 
@@ -50,13 +59,13 @@
                         <ComboBox Margin="10 0 10 0" Name="NumberOfRecords" FontSize="20"  Foreground="#FFDADCDF"
                                   Height="Auto" Width="Auto" SelectionChanged="NumberOfRecords_SelectionChanged" />
                         <Button x:Name='Backwards' FontSize="18" Content='Предыдущая страница' Margin='6'
-                                Click="Backwards_Click" />
+                                Click="Backwards_Click" Height="40" />
                         <Button  x:Name='Forward' FontSize="18" Content='Следующая страница'  Margin='6'
-                                Click="Forward_Click" />
+                                Click="Forward_Click" Height="40" />
                     </StackPanel>
                 </StackPanel>
 
-                <StackPanel Margin="20 0 40 0" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <StackPanel Margin="20 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Orientation="Horizontal">
 
                     <Label FontSize="20" Margin="0 0 10 0" Content="Пол:" />
@@ -67,6 +76,13 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 20 0" VerticalAlignment="Center" Foreground="#FFDADCDF" Text="Поиск:" FontSize="20"></TextBlock>
                     <TextBox Width="200" Height="35" FontSize="20" Foreground="#FFDADCDF" Name="TbFind" TextChanged="TbFind_OnTextChanged"></TextBox>
+                </StackPanel>
+
+                <StackPanel Margin="20 0 20 0" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                    <Label Margin="0 0 5 0" FontSize="20"  Content="День рождения в этом месяце:" />
+                    <CheckBox VerticalAlignment="Bottom" Foreground="#FFDADCDF" Width="Auto" FontSize="20"  x:Name="CheckBirthDay" IsChecked="False" Checked="CheckBirthDay_OnChecked" Unchecked="CheckBirthDay_OnUnchecked" Height="40" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
