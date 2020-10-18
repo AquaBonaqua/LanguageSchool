@@ -36,13 +36,21 @@
                 <DataGridTextColumn Header="Дата посещения" Width="160"
                                     Binding="{Binding LastServiceDate}" />
                 <DataGridTextColumn Header="Кол-во посещений"
-                                    Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy \}}" />
+                                    Binding="{Binding ServiceCount}" />
                 <DataGridTextColumn Header="Список тегов" Binding="{Binding Gender.Name}" />
 
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Изменить" Name="BtnEditClient"  Click="BtnEditClient_OnClick"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Удалить" Name="BtnDeleteClient"  Click="BtnDeleteClient_OnClick"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

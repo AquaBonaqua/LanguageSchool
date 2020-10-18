@@ -8,6 +8,7 @@ using LanguageSchool.Classes;
 using LanguageSchool.Forms;
 using PagingWPFDataGrid;
 
+
 namespace LanguageSchool.Pages
 
 {
@@ -19,7 +20,7 @@ namespace LanguageSchool.Pages
     public partial class PageClients : Page
     {
         private static readonly Paging PagedTable = new Paging();
-        private IList<Client> myList = AppData.Ent.Client.ToList();
+        private IList<Client> myList;
         private int numberOfRecPerPage;
 
       
@@ -47,6 +48,8 @@ namespace LanguageSchool.Pages
             CmbGender.SelectedItem = "Любой";
 
             UpdateTable();
+
+
         }
 
 
@@ -72,10 +75,14 @@ namespace LanguageSchool.Pages
 
         public void UpdateTable()
         {
+            myList = AppData.Ent.Client.ToList();
+
             var firstTable =
                 PagedTable.SetPaging(myList,
                     numberOfRecPerPage); //Fill a DataTable with the First set based on the numberOfRecPerPage
             ClientsGrid.ItemsSource = firstTable.DefaultView; //Fill the dataGrid with the DataTable created previously
+
+
 
             if (NumberOfRecords.SelectedIndex == 3)
             {
@@ -202,6 +209,43 @@ namespace LanguageSchool.Pages
             WindowClient windowClient = new WindowClient((sender as Button).DataContext as Client);
 
             windowClient.Show();
+        }
+
+        private void BtnDeleteClient_OnClick(object sender, RoutedEventArgs e)
+        {
+            var client = ((sender as Button).DataContext as Client);
+           
+            if (client.ClientService.Count > 0)
+            {
+                System.Windows.MessageBox.Show("Вы не можете удалить клиента с посещениями");
+            }
+
+            else
+            {
+                string s1 = string.Format(@"Удалить клиента {0} {1} {2} и всю информацию о его тегах?", client.LastName,client.FirstName,client.Patronymic);
+
+                MessageBoxResult result = MessageBox.Show(s1,
+                    "Подтверждение",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    AppData.Ent.Client.Remove(client);
+                    AppData.Ent.SaveChanges();
+                    MessageBox.Show(string.Format(@"Клиент {0} {1} {2} и  информация о его тегах удалены", client.LastName, client.FirstName, client.Patronymic));
+                    UpdateTable();
+
+
+                }
+
+                else
+                {
+                   
+                }
+
+                
+            }
+            
         }
     }
 
