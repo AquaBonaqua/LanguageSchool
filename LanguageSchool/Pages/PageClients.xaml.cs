@@ -22,12 +22,14 @@ namespace LanguageSchool.Pages
         private static readonly Paging PagedTable = new Paging();
         private IList<Client> myList;
         private int numberOfRecPerPage;
+    
 
-      
 
         public PageClients()
         {
             InitializeComponent();
+
+            
 
             PagedTable.PageIndex = 1; //Sets the Initial Index to a default value
 
@@ -49,8 +51,11 @@ namespace LanguageSchool.Pages
 
             UpdateTable();
 
+           
 
         }
+        
+       
 
 
         public void FindInTable()
@@ -203,12 +208,31 @@ namespace LanguageSchool.Pages
             UpdateTable();
         }
 
+       
 
         private void BtnEditClient_OnClick(object sender, RoutedEventArgs e)
         {
-            WindowClient windowClient = new WindowClient((sender as Button).DataContext as Client);
+            bool isWindowOpen = false;
 
-            windowClient.Show();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w is WindowClient)
+                {
+                    isWindowOpen = true;
+                    w.Activate();
+                }
+            }
+
+            if (!isWindowOpen)
+            {
+                WindowClient windowClient = new WindowClient((sender as Button).DataContext as Client);
+
+                windowClient.Owner = Application.Current.MainWindow;
+                windowClient.Show();
+            }
+
+
+           
         }
 
         private void BtnDeleteClient_OnClick(object sender, RoutedEventArgs e)
@@ -247,6 +271,15 @@ namespace LanguageSchool.Pages
             }
             
         }
+
+
+        private void AddClient_OnClick(object sender, RoutedEventArgs e)
+        {
+            WindowClient windowClient = new WindowClient();
+
+            windowClient.Owner = Application.Current.MainWindow;
+            windowClient.Show();
+        }
     }
 
     public static class StringExtensions
@@ -256,5 +289,7 @@ namespace LanguageSchool.Pages
             return source?.IndexOf(toCheck, comp) >= 0;
         }
     }
+
+
 
 }

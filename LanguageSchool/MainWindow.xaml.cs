@@ -1,9 +1,11 @@
-﻿using System.Windows;
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using LanguageSchool.Classes;
 using LanguageSchool.Pages;
+using LanguageSchool.Forms;
 
 namespace LanguageSchool
 {
@@ -18,6 +20,7 @@ namespace LanguageSchool
             AppData.Frame = MainFrame;
             AppData.Ent = new wsr_user_2Entities();
             AppData.Frame.Navigate(new PageClients());
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -58,19 +61,36 @@ namespace LanguageSchool
             }
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
 
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
+         
+
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            bool isWindowOpen = false;
+
+            foreach (Window w in Application.Current.Windows)
+            {
+
+
+                if (w is WindowClient)
+                {
+                    isWindowOpen = true;
+                    w.Activate();
+                }
+
+               
+            }
+
+            if (!isWindowOpen)
+            {
+                Application.Current.Shutdown();
+            }
+
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

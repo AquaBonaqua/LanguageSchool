@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Languages School" Height="800" Width="1600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Title="Languages School" Height="900" Width="1800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         WindowStyle="None">
 
     <StackPanel Background="WhiteSmoke">
@@ -53,7 +53,7 @@
             <Grid x:Name="GridCursor" Width="200" Height="5" Background="#FF2196F3" HorizontalAlignment="Left"
                   Margin="5 0 0 0" VerticalAlignment="Bottom" />
         </Grid>
-        <Grid x:Name="GridMain" Height="666">
+        <Grid x:Name="GridMain" Height="766">
             <Frame NavigationUIVisibility="Hidden" Name="MainFrame" VerticalAlignment="Stretch"
                    HorizontalAlignment="Stretch" />
         </Grid>
