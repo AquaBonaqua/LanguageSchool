@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Shell;
 using LanguageSchool.Classes;
 using LanguageSchool.Forms;
 using PagingWPFDataGrid;
-
 
 namespace LanguageSchool.Pages
 
@@ -22,7 +20,6 @@ namespace LanguageSchool.Pages
         private static readonly Paging PagedTable = new Paging();
         private IList<Client> myList;
         private int numberOfRecPerPage;
-    
 
 
         public PageClients()
@@ -49,32 +46,27 @@ namespace LanguageSchool.Pages
 
             CmbGender.SelectedItem = "Любой";
 
+            foreach (MainWindow window in Application.Current.Windows) window.TBTitle.Text = Title;
+
             UpdateTable();
 
            
 
         }
-        
-       
 
 
         public void FindInTable()
         {
-            if (TbFind.Text == String.Empty)
-            {
+            if (TbFind.Text == string.Empty)
                 UpdateTable();
-            }
 
             else
-            {
                 ClientsGrid.ItemsSource = myList.Where(x =>
                     x.FirstName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
                     x.LastName.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
                     x.Patronymic.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
                     x.Email.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase) ||
                     x.Phone.Contains(TbFind.Text, StringComparison.OrdinalIgnoreCase));
-            }
-
         }
 
 
@@ -94,7 +86,7 @@ namespace LanguageSchool.Pages
                 if (CmbGender.SelectedIndex != 2)
 
                 {
-                    if (TbFind.Text == String.Empty)
+                    if (TbFind.Text == string.Empty)
                     {
                         ClientsGrid.ItemsSource = myList.Where(x => x.Gender.Name == (string)CmbGender.SelectedItem);
                         PageInfo.Content = "Показано " + myList.Count + " записей";
@@ -118,7 +110,7 @@ namespace LanguageSchool.Pages
                 }
                 else
                 {
-                    if (TbFind.Text == String.Empty)
+                    if (TbFind.Text == string.Empty)
                     {
                         ClientsGrid.ItemsSource = myList;
                         PageInfo.Content = "Показано " + myList.Count + " записей";
@@ -208,24 +200,21 @@ namespace LanguageSchool.Pages
             UpdateTable();
         }
 
-       
 
         private void BtnEditClient_OnClick(object sender, RoutedEventArgs e)
         {
-            bool isWindowOpen = false;
+            var isWindowOpen = false;
 
             foreach (Window w in Application.Current.Windows)
-            {
                 if (w is WindowClient)
                 {
                     isWindowOpen = true;
                     w.Activate();
                 }
-            }
 
             if (!isWindowOpen)
             {
-                WindowClient windowClient = new WindowClient((sender as Button).DataContext as Client);
+                var windowClient = new WindowClient((sender as Button).DataContext as Client);
 
                 windowClient.Owner = Application.Current.MainWindow;
                 windowClient.Show();
@@ -237,18 +226,18 @@ namespace LanguageSchool.Pages
 
         private void BtnDeleteClient_OnClick(object sender, RoutedEventArgs e)
         {
-            var client = ((sender as Button).DataContext as Client);
+            var client = (sender as Button).DataContext as Client;
            
             if (client.ClientService.Count > 0)
             {
-                System.Windows.MessageBox.Show("Вы не можете удалить клиента с посещениями");
+                MessageBox.Show("Вы не можете удалить клиента с посещениями");
             }
 
             else
             {
-                string s1 = string.Format(@"Удалить клиента {0} {1} {2} и всю информацию о его тегах?", client.LastName,client.FirstName,client.Patronymic);
+                var s1 = string.Format(@"Удалить клиента {0} {1} {2} и всю информацию о его тегах?", client.LastName,client.FirstName,client.Patronymic);
 
-                MessageBoxResult result = MessageBox.Show(s1,
+                var result = MessageBox.Show(s1,
                     "Подтверждение",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question);
@@ -261,13 +250,6 @@ namespace LanguageSchool.Pages
 
 
                 }
-
-                else
-                {
-                   
-                }
-
-                
             }
             
         }
@@ -275,10 +257,17 @@ namespace LanguageSchool.Pages
 
         private void AddClient_OnClick(object sender, RoutedEventArgs e)
         {
-            WindowClient windowClient = new WindowClient();
+            var windowClient = new WindowClient();
 
             windowClient.Owner = Application.Current.MainWindow;
             windowClient.Show();
+        }
+
+        private void BtnService_OnClick(object sender, RoutedEventArgs e)
+        {
+            AppData.Frame.Navigate(new PageServices((sender as Button).DataContext as Client));
+
+           
         }
     }
 

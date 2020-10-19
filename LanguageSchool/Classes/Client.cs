@@ -18,7 +18,7 @@ namespace LanguageSchool.Classes
         public Client()
         {
             this.ClientService = new HashSet<ClientService>();
-            this.Tag = new HashSet<Tag>();
+            this.TagOfClient = new HashSet<TagOfClient>();
         }
     
         public int ID { get; set; }
@@ -36,6 +36,6 @@ namespace LanguageSchool.Classes
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientService> ClientService { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tag> Tag { get; set; }
+        public virtual ICollection<TagOfClient> TagOfClient { get; set; }
     }
 }

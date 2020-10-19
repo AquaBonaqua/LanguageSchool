@@ -6,72 +6,121 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:LanguageSchool.Forms"
         mc:Ignorable="d"
-        Title="Изменение данных" Height="600" Width="700" Background="#FF303030" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Title="Изменение данных" Height="600" Width="1216" Background="#FF303030" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None">
 
-    <StackPanel >
-        <Grid Height="80" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown" Background="#FF303030">
-          
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="7.5">
+    <Border BorderBrush="#FF2196F3" BorderThickness="1.5">
 
-                <Button Click="BtnMinimize_Click" Width="30" Padding="0" Height="30" Name="BtnMinimize" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" >
-                    <Image Width="30" Height="30" Source="../Resources/Icons/minimize.png"></Image>
-                </Button>
-                <Button Click="BtnCloseWindow_OnClick" Margin="5 0 0 0" Padding="0"  Width="30" Height="30" Name="BtnCloseWindow" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top">
-                    <Image  Width="30" Height="30" Source="../Resources/Icons/close.png" ></Image>
-                </Button>
+
+        <StackPanel>
+            <Grid Height="77" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown" Background="#FF303030">
+
+                <Label Foreground="#CC2196F3" Name="NameLabel" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Content="Клиент Клиент Клиент" FontSize="22" />
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="7.5">
+
+                    <Button Click="BtnMinimize_Click" Width="30" Padding="0" Height="30" Name="BtnMinimize"
+                            Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top">
+                        <Image Width="30" Height="30" Source="../Resources/Icons/minimize.png" />
+                    </Button>
+                    <Button Click="BtnCloseWindow_OnClick" Margin="5 0 0 0" Padding="0" Width="30" Height="30"
+                            Name="BtnCloseWindow" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top">
+                        <Image Width="30" Height="30" Source="../Resources/Icons/close.png" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+
+            <StackPanel Margin="0 40 0 0" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                <StackPanel.Resources>
+
+
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="White" />
+                    </Style>
+                </StackPanel.Resources>
+
+                <StackPanel Margin="0 0 0 0" Width="200" Orientation="Vertical">
+                    <TextBlock>Фамилия :</TextBlock>
+                    <TextBox Foreground="#FFDADCDF" Name="TBLastName" Margin="0 16 0 16" />
+                    <TextBlock TextWrapping="Wrap">Имя:</TextBlock>
+                    <TextBox Foreground="#FFDADCDF" Name="TBFirstName" Margin="0 16 0 16" />
+                    <TextBlock>Отчество:</TextBlock>
+                    <TextBox Foreground="#FFDADCDF" Name="TBPatronymic" Margin="0 16 0 16" />
+                    <TextBlock>Email:</TextBlock>
+                    <TextBox Foreground="#FFDADCDF" Name="TBEmail" Margin="0 16 0 16" />
+                    <TextBlock>Телефон:</TextBlock>
+                    <TextBox Foreground="#FFDADCDF" Name="TBPhoneNumber" Margin="0 16 0 16"
+                             PreviewTextInput="PhoneNumber_OnPreviewTextInput" />
+
+                </StackPanel>
+
+                <StackPanel Width="200" Margin="100 0 100 0" Orientation="Vertical">
+
+                    <TextBlock>Дата рождения:</TextBlock>
+                    <DatePicker Foreground="#FFDADCDF" Name="Birthday" Margin="0 16 0 32" />
+                    <TextBlock>Пол:</TextBlock>
+                    <ComboBox Foreground="#FFDADCDF" Name="CmbGender" Margin="0 16 0 32" />
+
+
+                    <TextBlock>Фото:</TextBlock>
+                    <Image x:Name="Photo" Margin="0,10,54,0" Height="159" />
+
+                </StackPanel>
+
+                <StackPanel Width="400" Orientation="Vertical">
+
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                              Name="TagsGrid">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Background"
+                                        Value="{Binding Color}" />
+                            </Style>
+                        </DataGrid.RowStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="50" Binding="{Binding ID}" />
+                            <DataGridTextColumn Header="Тег" Width="200" Binding="{Binding Title}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTemplateColumn Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Удалить" Name="BtnDeleteTag" Click="BtnDeleteTag_OnClick" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+
+                </StackPanel>
+
+
             </StackPanel>
-        </Grid>
 
 
-        <StackPanel Margin="0 0 0 60" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <StackPanel.Resources>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 45 0 0"
+                        Orientation="Horizontal">
+                <Button Margin="0 0 20 0" Name="BtnSave" Content="Сохранить" Click="BtnSave_OnClick" />
+                <Button Name="BtnClose" Content="Закрыть" Click="BtnClose_OnClick" />
+                <StackPanel Margin="80 0 0 0" Orientation="Horizontal">
+                    <ComboBox Width="100" Foreground="White" Name="CmbTags" />
+                    <Button Margin="40 0 0 0" Name="ButtonAddTag" Content="Добавить тег" Click="ButtonAddTag_Click" />
 
-
-                <Style TargetType="TextBlock">
-                    <Setter Property="Foreground" Value="White"/>
-                </Style>
-            </StackPanel.Resources>
-          
-            <StackPanel Margin="0 0 100 0" Width="200" Orientation="Vertical">
-                <TextBlock>Фамилия :</TextBlock>
-                <TextBox Foreground="#FFDADCDF" Name="TBLastName" Margin="0 16 0 16" >
-
-                </TextBox>
-                <TextBlock TextWrapping="Wrap">Имя:</TextBlock>
-                <TextBox Foreground="#FFDADCDF" Name="TBFirstName" Margin="0 16 0 16" ></TextBox>
-                <TextBlock>Отчество:</TextBlock>
-                <TextBox Foreground="#FFDADCDF" Name="TBPatronymic" Margin="0 16 0 16" ></TextBox>
-                <TextBlock>Email:</TextBlock>
-                <TextBox Foreground="#FFDADCDF" Name="TBEmail" Margin="0 16 0 16" ></TextBox>
-                <TextBlock>Телефон:</TextBlock>
-                <TextBox Foreground="#FFDADCDF" Name="TBPhoneNumber" Margin="0 16 0 16" PreviewTextInput="PhoneNumber_OnPreviewTextInput"></TextBox>
-                
+                </StackPanel>
             </StackPanel>
-
-            <StackPanel Width="200" Orientation="Vertical">
-
-                <TextBlock>Дата рождения:</TextBlock>
-                <DatePicker Foreground="#FFDADCDF" Name="Birthday" Margin="0 16 0 32" ></DatePicker>
-                <TextBlock>Пол:</TextBlock>
-                <ComboBox Foreground="#FFDADCDF" Name="CmbGender" Margin="0 16 0 32" ></ComboBox>
-
-
-                <TextBlock>Фото:</TextBlock>
-                <Image x:Name="Photo" Margin="0,10,54,0" Height="159"/>
-
-            </StackPanel>
-
-
-
 
         </StackPanel>
-
-        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="40" Orientation="Horizontal">
-            <Button  Margin="0 0 20 0" Name="BtnSave" Content="Сохранить" Click="BtnSave_OnClick" ></Button>
-            <Button Name="BtnClose" Content="Закрыть" Click="BtnClose_OnClick"  ></Button>
-        </StackPanel>
-
-
-    </StackPanel>
+    </Border>
 </Window>

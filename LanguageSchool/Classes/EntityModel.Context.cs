@@ -36,5 +36,6 @@ namespace LanguageSchool.Classes
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<ServicePhoto> ServicePhoto { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
+        public virtual DbSet<TagOfClient> TagOfClient { get; set; }
     }
 }

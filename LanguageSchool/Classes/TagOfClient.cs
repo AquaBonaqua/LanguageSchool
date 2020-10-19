@@ -12,19 +12,13 @@ namespace LanguageSchool.Classes
     using System;
     using System.Collections.Generic;
     
-    public partial class Tag
+    public partial class TagOfClient
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tag()
-        {
-            this.TagOfClient = new HashSet<TagOfClient>();
-        }
-    
         public int ID { get; set; }
-        public string Title { get; set; }
-        public string Color { get; set; }
+        public int ClientID { get; set; }
+        public int TagID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TagOfClient> TagOfClient { get; set; }
+        public virtual Client Client { get; set; }
+        public virtual Tag Tag { get; set; }
     }
 }

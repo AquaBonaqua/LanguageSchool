@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище wsr_user_2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище wsr_user_2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012"
+              Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AttachedProduct">
           <Key>
             <PropertyRef Name="MainProductID" />
@@ -124,6 +128,7 @@
             <PropertyRef Name="ClientID" />
             <PropertyRef Name="TagID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientID" Type="int" Nullable="false" />
           <Property Name="TagID" Type="int" Nullable="false" />
         </EntityType>
@@ -260,7 +265,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TagOfClient_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TagOfClient" Type="Self.TagOfClient" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
@@ -317,7 +324,8 @@
             <End Role="Service" EntitySet="Service" />
             <End Role="ClientService" EntitySet="ClientService" />
           </AssociationSet>
-          <AssociationSet Name="FK_DocumentByService_ClientService" Association="Self.FK_DocumentByService_ClientService">
+          <AssociationSet Name="FK_DocumentByService_ClientService"
+                          Association="Self.FK_DocumentByService_ClientService">
             <End Role="ClientService" EntitySet="ClientService" />
             <End Role="DocumentByService" EntitySet="DocumentByService" />
           </AssociationSet>
@@ -354,7 +362,10 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="wsr_user_2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="wsr_user_2Model" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ID" />
@@ -370,8 +381,10 @@
           <Property Name="GenderCode" Type="Int32" Nullable="false" />
           <Property Name="PhotoPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Gender" Relationship="Self.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
-          <NavigationProperty Name="ClientService" Relationship="Self.FK_ClientService_Client" FromRole="Client" ToRole="ClientService" />
-          <NavigationProperty Name="Tag" Relationship="Self.TagOfClient" FromRole="Client" ToRole="Tag" />
+          <NavigationProperty Name="ClientService" Relationship="Self.FK_ClientService_Client" FromRole="Client"
+                              ToRole="ClientService" />
+          <NavigationProperty Name="TagOfClient" Relationship="Self.FK_TagOfClient_Client" FromRole="Client"
+                              ToRole="TagOfClient" />
         </EntityType>
         <EntityType Name="ClientService">
           <Key>
@@ -382,10 +395,14 @@
           <Property Name="ServiceID" Type="Int32" Nullable="false" />
           <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_ClientService_Client" FromRole="ClientService" ToRole="Client" />
-          <NavigationProperty Name="Service" Relationship="Self.FK_ClientService_Service" FromRole="ClientService" ToRole="Service" />
-          <NavigationProperty Name="DocumentByService" Relationship="Self.FK_DocumentByService_ClientService" FromRole="ClientService" ToRole="DocumentByService" />
-          <NavigationProperty Name="ProductSale" Relationship="Self.FK_ProductSale_ClientService" FromRole="ClientService" ToRole="ProductSale" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_ClientService_Client" FromRole="ClientService"
+                              ToRole="Client" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_ClientService_Service" FromRole="ClientService"
+                              ToRole="Service" />
+          <NavigationProperty Name="DocumentByService" Relationship="Self.FK_DocumentByService_ClientService"
+                              FromRole="ClientService" ToRole="DocumentByService" />
+          <NavigationProperty Name="ProductSale" Relationship="Self.FK_ProductSale_ClientService"
+                              FromRole="ClientService" ToRole="ProductSale" />
         </EntityType>
         <EntityType Name="DocumentByService">
           <Key>
@@ -393,8 +410,10 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClientServiceID" Type="Int32" Nullable="false" />
-          <Property Name="DocumentPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ClientService" Relationship="Self.FK_DocumentByService_ClientService" FromRole="DocumentByService" ToRole="ClientService" />
+          <Property Name="DocumentPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true"
+                    Nullable="false" />
+          <NavigationProperty Name="ClientService" Relationship="Self.FK_DocumentByService_ClientService"
+                              FromRole="DocumentByService" ToRole="ClientService" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -411,7 +430,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Manufacturer" FromRole="Manufacturer" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Manufacturer" FromRole="Manufacturer"
+                              ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -424,9 +444,12 @@
           <Property Name="MainImagePath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="ManufacturerID" Type="Int32" />
-          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
-          <NavigationProperty Name="ProductPhoto" Relationship="Self.FK_ProductPhoto_Product" FromRole="Product" ToRole="ProductPhoto" />
-          <NavigationProperty Name="ProductSale" Relationship="Self.FK_ProductSale_Product" FromRole="Product" ToRole="ProductSale" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product"
+                              ToRole="Manufacturer" />
+          <NavigationProperty Name="ProductPhoto" Relationship="Self.FK_ProductPhoto_Product" FromRole="Product"
+                              ToRole="ProductPhoto" />
+          <NavigationProperty Name="ProductSale" Relationship="Self.FK_ProductSale_Product" FromRole="Product"
+                              ToRole="ProductSale" />
           <NavigationProperty Name="Product1" Relationship="Self.AttachedProduct" FromRole="Product" ToRole="Product1" />
           <NavigationProperty Name="Product2" Relationship="Self.AttachedProduct" FromRole="Product1" ToRole="Product" />
         </EntityType>
@@ -437,7 +460,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="PhotoPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductPhoto_Product" FromRole="ProductPhoto" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductPhoto_Product" FromRole="ProductPhoto"
+                              ToRole="Product" />
         </EntityType>
         <EntityType Name="ProductSale">
           <Key>
@@ -448,8 +472,10 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="ClientServiceID" Type="Int32" />
-          <NavigationProperty Name="ClientService" Relationship="Self.FK_ProductSale_ClientService" FromRole="ProductSale" ToRole="ClientService" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductSale_Product" FromRole="ProductSale" ToRole="Product" />
+          <NavigationProperty Name="ClientService" Relationship="Self.FK_ProductSale_ClientService"
+                              FromRole="ProductSale" ToRole="ClientService" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductSale_Product" FromRole="ProductSale"
+                              ToRole="Product" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -462,8 +488,10 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Discount" Type="Double" />
           <Property Name="MainImagePath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ClientService" Relationship="Self.FK_ClientService_Service" FromRole="Service" ToRole="ClientService" />
-          <NavigationProperty Name="ServicePhoto" Relationship="Self.FK_ServicePhoto_Service" FromRole="Service" ToRole="ServicePhoto" />
+          <NavigationProperty Name="ClientService" Relationship="Self.FK_ClientService_Service" FromRole="Service"
+                              ToRole="ClientService" />
+          <NavigationProperty Name="ServicePhoto" Relationship="Self.FK_ServicePhoto_Service" FromRole="Service"
+                              ToRole="ServicePhoto" />
         </EntityType>
         <EntityType Name="ServicePhoto">
           <Key>
@@ -472,7 +500,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ServiceID" Type="Int32" Nullable="false" />
           <Property Name="PhotoPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="Self.FK_ServicePhoto_Service" FromRole="ServicePhoto" ToRole="Service" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_ServicePhoto_Service" FromRole="ServicePhoto"
+                              ToRole="Service" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -481,7 +510,20 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Color" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.TagOfClient" FromRole="Tag" ToRole="Client" />
+          <NavigationProperty Name="TagOfClient" Relationship="Self.FK_TagOfClient_Tag" FromRole="Tag"
+                              ToRole="TagOfClient" />
+        </EntityType>
+        <EntityType Name="TagOfClient">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="TagID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_TagOfClient_Client" FromRole="TagOfClient"
+                              ToRole="Client" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_TagOfClient_Tag" FromRole="TagOfClient" ToRole="Tag" />
         </EntityType>
         <Association Name="FK_Client_Gender">
           <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
@@ -503,6 +545,20 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="ClientService">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagOfClient_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TagOfClient" Type="Self.TagOfClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TagOfClient">
               <PropertyRef Name="ClientID" />
             </Dependent>
           </ReferentialConstraint>
@@ -591,13 +647,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TagOfClient_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="TagOfClient" Type="Self.TagOfClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TagOfClient">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AttachedProduct">
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <End Role="Product1" Type="Self.Product" Multiplicity="*" />
-        </Association>
-        <Association Name="TagOfClient">
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
-          <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
         </Association>
         <EntityContainer Name="wsr_user_2Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Client" EntityType="Self.Client" />
@@ -611,6 +675,7 @@
           <EntitySet Name="Service" EntityType="Self.Service" />
           <EntitySet Name="ServicePhoto" EntityType="Self.ServicePhoto" />
           <EntitySet Name="Tag" EntityType="Self.Tag" />
+          <EntitySet Name="TagOfClient" EntityType="Self.TagOfClient" />
           <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Client" EntitySet="Client" />
@@ -619,11 +684,16 @@
             <End Role="Client" EntitySet="Client" />
             <End Role="ClientService" EntitySet="ClientService" />
           </AssociationSet>
+          <AssociationSet Name="FK_TagOfClient_Client" Association="Self.FK_TagOfClient_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="TagOfClient" EntitySet="TagOfClient" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClientService_Service" Association="Self.FK_ClientService_Service">
             <End Role="Service" EntitySet="Service" />
             <End Role="ClientService" EntitySet="ClientService" />
           </AssociationSet>
-          <AssociationSet Name="FK_DocumentByService_ClientService" Association="Self.FK_DocumentByService_ClientService">
+          <AssociationSet Name="FK_DocumentByService_ClientService"
+                          Association="Self.FK_DocumentByService_ClientService">
             <End Role="ClientService" EntitySet="ClientService" />
             <End Role="DocumentByService" EntitySet="DocumentByService" />
           </AssociationSet>
@@ -647,13 +717,13 @@
             <End Role="Service" EntitySet="Service" />
             <End Role="ServicePhoto" EntitySet="ServicePhoto" />
           </AssociationSet>
+          <AssociationSet Name="FK_TagOfClient_Tag" Association="Self.FK_TagOfClient_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="TagOfClient" EntitySet="TagOfClient" />
+          </AssociationSet>
           <AssociationSet Name="AttachedProduct" Association="Self.AttachedProduct">
             <End Role="Product" EntitySet="Product" />
             <End Role="Product1" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="TagOfClient" Association="Self.TagOfClient">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Tag" EntitySet="Tag" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -661,7 +731,8 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище wsr_user_2ModelContainer" CdmEntityContainer="wsr_user_2Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище wsr_user_2ModelContainer"
+                                CdmEntityContainer="wsr_user_2Entities">
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="wsr_user_2Model.Client">
               <MappingFragment StoreEntitySet="Client">
@@ -779,20 +850,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AttachedProduct" TypeName="wsr_user_2Model.AttachedProduct" StoreEntitySet="AttachedProduct">
+          <EntitySetMapping Name="TagOfClient">
+            <EntityTypeMapping TypeName="wsr_user_2Model.TagOfClient">
+              <MappingFragment StoreEntitySet="TagOfClient">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AttachedProduct" TypeName="wsr_user_2Model.AttachedProduct"
+                                 StoreEntitySet="AttachedProduct">
             <EndProperty Name="Product">
               <ScalarProperty Name="ID" ColumnName="MainProductID" />
             </EndProperty>
             <EndProperty Name="Product1">
               <ScalarProperty Name="ID" ColumnName="AttachedProductID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="TagOfClient" TypeName="wsr_user_2Model.TagOfClient" StoreEntitySet="TagOfClient">
-            <EndProperty Name="Client">
-              <ScalarProperty Name="ID" ColumnName="ClientID" />
-            </EndProperty>
-            <EndProperty Name="Tag">
-              <ScalarProperty Name="ID" ColumnName="TagID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

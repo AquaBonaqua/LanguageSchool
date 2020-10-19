@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace LanguageSchool.Classes
 {
-
     public partial class Client
     {
         public string LastServiceDate
@@ -14,7 +9,7 @@ namespace LanguageSchool.Classes
             get
             {
                 var list = AppData.Ent.ClientService.Where(x => x.ClientID == ID).ToList();
-                string LastServiceDate = list.LastOrDefault()?.StartTime.ToShortDateString() ?? "Не было посещений";
+                var LastServiceDate = list.LastOrDefault()?.StartTime.ToShortDateString() ?? "Не было посещений";
                 return LastServiceDate;
             }
         }
@@ -25,12 +20,9 @@ namespace LanguageSchool.Classes
             {
                 var list = AppData.Ent.ClientService.Where(x => x.ClientID == ID).ToList();
 
-                int ServiceCount = list.Count;
+                var ServiceCount = list.Count;
                 return ServiceCount;
             }
         }
     }
-
-
-   
 }
